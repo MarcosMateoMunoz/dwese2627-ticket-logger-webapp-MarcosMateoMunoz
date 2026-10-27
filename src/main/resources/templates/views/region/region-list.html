@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head ('Ticket Logger - Region List')"></head>
+
+<body class="d-flex flex-column h-100">
+
+<header th:replace="fragments/header :: header"></header>
+
+<main class="list-page">
+    <div class="list-card">
+
+        <h1 th:text="#{region.list.title}"></h1>
+
+        <!-- Botón para añadir -->
+        <a th:href="@{/regions/new}"
+           class="btn btn-success"
+           th:text="#{region.list.add}">
+        </a>
+
+        <!-- Mensaje de error -->
+        <div th:if="${errorMessage}"
+             class="alert alert-danger"
+             th:text="${errorMessage}">
+        </div>
+
+        <!-- Tabla -->
+        <table class="table table-bordered table-striped mt-3">
+
+            <thead>
+            <tr>
+                <th th:text="#{region.list.id}"></th>
+                <th th:text="#{region.list.code}"></th>
+                <th th:text="#{region.list.name}"></th>
+                <th th:text="#{region.list.actions}"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="region : ${listRegions}">
+
+                <td th:text="${region.id}"></td>
+                <td th:text="${region.code}"></td>
+                <td th:text="${region.name}"></td>
+
+                <td>
+                    <a th:href="@{/regions/edit(id=${region.id})}"
+                       class="btn btn-primary btn-sm"
+                       th:text="#{region.list.edit}">
+                    </a>
+
+                    <form th:action="@{/regions/delete}"
+                          method="post"
+                          class="d-inline">
+
+                        <input type="hidden"
+                               name="id"
+                               th:value="${region.id}" />
+
+                        <button type="submit"
+                                class="btn btn-danger btn-sm"
+                                th:text="#{region.list.delete}"
+                                th:onclick="|return confirm('#{region.list.delete.confirm}');|">
+                        </button>
+
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/}"
+           class="btn btn-secondary"
+           th:text="#{region.list.back}">
+        </a>
+
+    </div>
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

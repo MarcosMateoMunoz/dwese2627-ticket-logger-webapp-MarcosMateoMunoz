@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head ('Ticket Logger - Home')"></head>
+
+
+<body class="d-flex flex-column h-100">
+
+
+<!-- Insertar el fragmento del header -->
+<header th:replace="fragments/header :: header"></header>
+
+
+<!-- Contenido dinámico -->
+<main>
+    <h1>Ticket Logger</h1>
+    <p class="lead">Gestión de comunidades autónomas y provincias</p>
+    <div class="d-flex gap-2 justify-content-center">
+        <a th:href="@{/regions}" class="btn btn-dark">Comunidades Autónomas</a>
+        <a th:href="@{/provinces}" class="btn btn-dark">Provincias</a>
+    </div>
+</main>
+
+
+<!-- Insertar el fragmento del footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+
+
+<div th:replace="fragments/scripts :: scripts"></div>
+
+
+</body>
+</html>
